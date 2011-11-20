@@ -9,10 +9,13 @@
 #import "CalculatorBrain.h"
 
 @interface CalculatorBrain ()
+
 @property (nonatomic,strong) NSMutableArray *operandStack;
+
 @end
 
 @implementation CalculatorBrain
+
 @synthesize operandStack = _operandStack;
 
 - (NSMutableArray *)operandStack
@@ -38,10 +41,12 @@
         result = [self popOperand] * [self popOperand];
     }
     else if ([operation isEqualToString:@"-"]) {
-        result = [self popOperand] - [self popOperand];
+        double subtrahend = [self popOperand];
+        result = [self popOperand] - subtrahend;
     }
     else if ([operation isEqualToString:@"/"]) {
-        result = [self popOperand] / [self popOperand];
+        double divisor = [self popOperand];
+        result = [self popOperand] / divisor;
     }
     
     [self pushOperand:result];

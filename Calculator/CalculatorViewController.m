@@ -10,11 +10,14 @@
 #import "CalculatorBrain.h"
 
 @interface CalculatorViewController ()
+
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
 @property (nonatomic,strong) CalculatorBrain *brain;
+
 @end
 
 @implementation CalculatorViewController
+
 @synthesize display = _display;
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
@@ -31,7 +34,12 @@
     
     if (self.userIsInTheMiddleOfEnteringANumber)
     {
-    self.display.text = [self.display.text stringByAppendingString:digit];
+    NSRange range = [self.display.text rangeOfString:@"."];
+    
+    if ((![sender.currentTitle isEqualToString:@"."]) || (range.location == NSNotFound))
+        {
+        self.display.text = [self.display.text stringByAppendingString:digit];
+        }
     }
     else
     {
@@ -45,8 +53,7 @@
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
     
     double result = [self.brain performOperation:sender.currentTitle];
-    NSString *resultString = [NSString stringWithFormat:@"%g", result];
-    self.display.text = resultString;
+    self.display.text = [NSString stringWithFormat:@"%g", result];
 }
 
 - (IBAction)enterPressed {
