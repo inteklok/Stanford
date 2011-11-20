@@ -48,6 +48,21 @@
         double divisor = [self popOperand];
         result = [self popOperand] / divisor;
     }
+    else if ([operation isEqualToString:@"sin"]) {
+        result = sin([self popOperand]);
+    }
+    else if ([operation isEqualToString:@"cos"]) {
+        result = cos([self popOperand]);
+    }
+    else if ([operation isEqualToString:@"π"]) {
+        double pi = 3.141592;
+        result = pi;
+    }
+    else if ([operation isEqualToString:@"sqrt"]) {
+        result = sqrt([self popOperand]);
+    }
+
+
     
     [self pushOperand:result];
     
