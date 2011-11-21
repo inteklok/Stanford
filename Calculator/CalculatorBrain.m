@@ -46,7 +46,8 @@
     }
     else if ([operation isEqualToString:@"/"]) {
         double divisor = [self popOperand];
-        result = [self popOperand] / divisor;
+        if(divisor)  //Check for div by zero
+            result = [self popOperand] / divisor;
     }
     else if ([operation isEqualToString:@"sin"]) {
         result = sin([self popOperand]);
