@@ -72,6 +72,13 @@
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
+- (IBAction)clearPressed {
+    self.display.text = @"0";
+    self.strip.text = @"";
+    self.userIsInTheMiddleOfEnteringANumber = NO;
+    [self.brain clearBrain];
+}
+
 - (void)viewDidUnload {
     [self setStrip:nil];
     [super viewDidUnload];

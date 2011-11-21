@@ -77,4 +77,8 @@
     return [operandObject doubleValue];
 }
 
+- (void)clearBrain {
+    [self.operandStack removeAllObjects];
+}
+
 @end

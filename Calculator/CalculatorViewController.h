@@ -15,5 +15,6 @@
 
 - (IBAction)operationPressed:(UIButton *)sender;
 - (IBAction)enterPressed;
+- (IBAction)clearPressed;
 
 @end
