@@ -37,11 +37,11 @@
     {
     NSRange range = [self.display.text rangeOfString:@"."];
     
-    if ((![sender.currentTitle isEqualToString:@"."]) || (range.location == NSNotFound))
-        {
-        self.display.text = [self.display.text stringByAppendingString:digit];
-        self.strip.text = [self.strip.text stringByAppendingString:digit];
-        }
+        if ((![sender.currentTitle isEqualToString:@"."]) || (range.location == NSNotFound))
+            {
+            self.display.text = [self.display.text stringByAppendingString:digit];
+            self.strip.text = [self.strip.text stringByAppendingString:digit];
+            }
     }
     else
     {
