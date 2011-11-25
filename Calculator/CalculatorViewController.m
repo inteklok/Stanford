@@ -40,13 +40,11 @@
         if ((![sender.currentTitle isEqualToString:@"."]) || (range.location == NSNotFound))
             {
             self.display.text = [self.display.text stringByAppendingString:digit];
-            self.strip.text = [self.strip.text stringByAppendingString:digit];
             }
     }
     else
     {
         self.display.text = digit;
-        self.strip.text = [self.strip.text stringByAppendingString:digit];
         
         self.userIsInTheMiddleOfEnteringANumber = YES;
     }
@@ -56,8 +54,7 @@
 - (IBAction)operationPressed:(UIButton *)sender {
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
     
-    self.strip.text = [self.strip.text stringByAppendingString:sender.currentTitle];
-    self.strip.text = [self.strip.text stringByAppendingString:@" "];
+    self.strip.text = [self.strip.text stringByAppendingFormat:@"%@ ",sender.currentTitle];
     
     double result = [self.brain performOperation:sender.currentTitle];
     
@@ -66,8 +63,8 @@
 }
 
 - (IBAction)enterPressed {
+    self.strip.text = [self.strip.text stringByAppendingFormat:@"%@ ",self.display.text];
     [self.brain pushOperand:[self.display.text doubleValue]];
-    self.strip.text = [self.strip.text stringByAppendingString:@" "];
     
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
