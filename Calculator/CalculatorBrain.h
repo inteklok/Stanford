@@ -15,4 +15,9 @@
 - (double)popOperand;
 - (void)clearBrain;
 
+@property (nonatomic, readonly) id program;
+
++ (NSString *)descriptionOfProgram:(id)program;
++ (double)runProgram:(id)program;
+
 @end
