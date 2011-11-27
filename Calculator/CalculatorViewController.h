@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *display;
 @property (weak, nonatomic) IBOutlet UILabel *strip;
+@property (weak, nonatomic) IBOutlet UILabel *infixStrip;
 
 - (IBAction)operationPressed:(UIButton *)sender;
 - (IBAction)enterPressed;

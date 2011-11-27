@@ -20,6 +20,7 @@
 
 @synthesize display = _display;
 @synthesize strip = _strip;
+@synthesize infixStrip = _infixStrip;
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
 
@@ -60,6 +61,8 @@
     
     self.display.text = [NSString stringWithFormat:@"%g", result];
     
+    self.infixStrip.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+    
 }
 
 - (IBAction)enterPressed {
@@ -78,6 +81,7 @@
 
 - (void)viewDidUnload {
     [self setStrip:nil];
+    [self setInfixStrip:nil];
     [super viewDidUnload];
 }
 @end
