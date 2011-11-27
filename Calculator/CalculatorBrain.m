@@ -12,6 +12,11 @@
 
 @property (nonatomic,strong) NSMutableArray *programStack;
 
++ (NSString *)descriptionOfProgram:(id)program;
++ (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack;
++ (BOOL)isOperation:(NSString *)operation;
++ (BOOL)isSingleOperandOperation:(NSString *)operation;
+
 @end
 
 @implementation CalculatorBrain
@@ -32,14 +37,63 @@
 
 + (NSString *)descriptionOfProgram:(id)program
 {
-    return @"Implement this in Homework #2";
+    NSMutableArray *stack;
+    if ([program isKindOfClass:[NSArray class]]) 
+        stack = [program mutableCopy];
+    
+    return [self descriptionOfTopOfStack:stack];
 }
 
+
++ (NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack {
+    
+    NSString *description = @"";
+    
+    id topOfStack = [stack lastObject];
+    if (topOfStack) [stack removeLastObject];
+    
+    if ([topOfStack isKindOfClass:[NSNumber class]])
+    {
+        description = [topOfStack stringValue];
+    }
+    else if ([topOfStack isKindOfClass:[NSString class]])
+    {
+        if ([self isOperation:topOfStack])
+        {
+        if ([self isSingleOperandOperation:topOfStack]) {
+            description = [NSString stringWithFormat:@"%@(%@)", topOfStack, [self descriptionOfTopOfStack:stack]];
+        }
+                    
+             else {
+                 NSString *secondOperand = [self descriptionOfTopOfStack:stack];
+                 description = [NSString stringWithFormat:@"(%@ %@ %@)", [self descriptionOfTopOfStack:stack], topOfStack, secondOperand];
+             }
+        }
+    
+    else description = topOfStack;
+        
+    }
+    
+    return description;
+}
+
++ (BOOL)isOperation:(NSString *)operation {
+    NSSet *operations = [NSSet setWithObjects:@"sqrt", @"sin", @"com", @"+", @"-", @"*", @"/", nil];
+    
+    return[operations containsObject:operation];
+}
+
++ (BOOL)isSingleOperandOperation:(NSString *)operation {
+    NSSet *singleOperandOperations = [NSSet setWithObjects:@"sqrt", @"sin", @"com", nil];
+    
+    return[singleOperandOperations containsObject:operation];
+}
 
 - (void)pushOperand:(double)operand
 {
     [self.programStack addObject:[NSNumber numberWithDouble:operand]];
 }
+
 
 + (double)popOperandOffProgramStack:(NSMutableArray *)stack
 {
@@ -104,6 +158,7 @@
     if ([program isKindOfClass:[NSArray class]]) {
         stack = [program mutableCopy];
     }
+    NSLog(@"Description of program: %@", [self descriptionOfProgram:program]);
     return [self popOperandOffProgramStack:stack];
 }
 
