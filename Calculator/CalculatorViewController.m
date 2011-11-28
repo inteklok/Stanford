@@ -75,6 +75,7 @@
 - (IBAction)clearPressed {
     self.display.text = @"0";
     self.strip.text = @"";
+    self.infixStrip.text = @"";
     self.userIsInTheMiddleOfEnteringANumber = NO;
     [self.brain clearBrain];
 }
